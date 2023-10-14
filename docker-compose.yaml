@@ -1,0 +1,36 @@
+version: "3.8"
+
+networks:
+  backend:
+    driver: bridge
+
+services:
+  db:
+    build:
+      context: ./docker/mysql
+    volumes:
+      - ./docker/mysql/data:/var/lib/mysql
+      - ./docker/mysql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+    restart: always
+    ports:
+      - "3306:3306"
+    networks:
+      - backend
+  app:
+    image: mariosmello/fiap-postech-coffee-app:latest
+    ports:
+      - 8080:80
+    networks:
+      - backend
+    environment:
+      - "DB_HOST=db"
+    command: sh -c "composer install --ignore-platform-reqs && php artisan key:generate && sleep 5 && php artisan migrate && apache2-foreground"
+    depends_on:
+      - db
+  redis:
+    image: redis:4.0
+    container_name: redis
+    ports:
+      - "6382:6379"
+    networks:
+      - backend
