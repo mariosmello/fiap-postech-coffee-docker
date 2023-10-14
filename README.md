@@ -1,4 +1,4 @@
-# FIAP - postech
+# FIAP/Alura - Postech
 ## Coffee App - Docker
 ### Instruções
 Para visualizar a aplicação basta fazer o download deste repositório e executar o comando:
@@ -10,3 +10,5 @@ Com a finalização da instalação do container basta acessar no navegador o en
 http://localhost:8080
 ```
 ### Informações
+- Sobre o container - TBD
+- Documentação - TBD
