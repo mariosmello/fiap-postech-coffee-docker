@@ -24,7 +24,7 @@ services:
       - backend
     environment:
       - "DB_HOST=db"
-    command: sh -c "composer install --ignore-platform-reqs && php artisan key:generate && sleep 5 && php artisan migrate && apache2-foreground"
+    command: sh -c "sleep 7 && composer install --ignore-platform-reqs && php artisan key:generate && sleep 8 && php artisan migrate:fresh --seed && apache2-foreground"
     depends_on:
       - db
   redis:
