@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api
+  labels:
+    app: api
+spec:
+  template:
+    metadata:
+      name: api
+      labels:
+        app: api
+    spec:
+      containers:
+        - name: api-container
+          image: mariosmello/fiap-postech-coffee-app:latest
+          ports:
+            - containerPort: 80
+          lifecycle:
+            postStart:
+              exec:
+                command: ["/bin/sh", "-c", "php artisan key:generate && php artisan migrate:fresh --seed"]
+          resources:
+            requests:
+              cpu: 10m
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api
