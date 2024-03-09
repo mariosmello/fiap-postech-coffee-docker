@@ -5,6 +5,7 @@ export const options = {
   duration: '30s',
 };
 export default function () {
-  http.get('http://127.0.0.1:51286/api/user?document=34360924870');
-  sleep(0.1);
+  const res = http.get('http://127.0.0.1:61498/api/user?document=34360924870');
+  console.log(res.body);
+  sleep(1);
 }
